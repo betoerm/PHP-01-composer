@@ -1,0 +1,24 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    name: Máquina de busca
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+      
+    - name: Validar arquivos composer.[json|lock]
+      run: cd search-engine-app && composer validate
+      
+    - name: Instalar dependências
+      run: cd search-engine-app && composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Testes unitários
+      run: cd search-engine-app && composer run-script test
+
+    - name: Executar pesquia
+      run: cd search-engine-app && php app search "symfony"
