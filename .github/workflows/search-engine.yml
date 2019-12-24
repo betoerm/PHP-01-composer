@@ -15,10 +15,10 @@ jobs:
       run: composer validate
       
     - name: Instalar dependências
-      run: cd search-engine-app && composer install --prefer-dist --no-progress --no-suggest
+      run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: Testes unitários
-      run: cd search-engine-app && composer run-script test
+      run: composer run-script test
 
     - name: Executar pesquia
-      run: cd search-engine-app && php app search "symfony"
+      run: php app search "symfony"
